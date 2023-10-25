@@ -126,4 +126,6 @@ WHERE customer.active = 0;
 UPDATE deleted_users
 SET date = curdate();
 
+SET FOREIGN_KEY_CHECKS=0; 
 DELETE FROM customer WHERE active = 0;
+SET FOREIGN_KEY_CHECKS=1;
