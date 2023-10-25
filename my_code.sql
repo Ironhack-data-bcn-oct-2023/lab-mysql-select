@@ -158,10 +158,11 @@ WHERE customer.active=0;
 
 SELECT * FROM deleted_users;
 
-
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_SAFE_UPDATES = 0;        
 DELETE FROM customer WHERE customer.active=0;
 SET SQL_SAFE_UPDATES = 1;
+SET FOREIGN_KEY_CHECKS=1;
 
 
 
