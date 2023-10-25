@@ -66,4 +66,23 @@ INSERT INTO staff(first_name, last_name, address_id,store_id,active,username,las
     where film_id = 1 AND store_id = 1; -- inventory_id = 1 a 4
     select staff_id from sakila.staff
     where first_name = 'Mike' and last_name = 'Hillyer'; -- staff_id = 1
-  INSERT INTO rental(rental_date, inventory_id, customer_id,staff_id,last_update) VALUES ("2023-10-25",3,130,1,'2023-10-25' )  
+  INSERT INTO rental(rental_date, inventory_id, customer_id,staff_id,last_update) VALUES ("2023-10-26",3,130,1,'2023-10-26' );  
+
+-- 22. Delete non-active users, but first, create a _backup table_ `deleted_users` to store `customer_id`, `email`, and the `date` for the users that would be deleted. Follow these steps:
+    -- Check if there are any non-active users
+    -- Create a table _backup table_ as suggested
+    -- Insert the non active users in the table _backup table_
+    -- Delete the non active users from the table _customer_
+    
+SELECT COUNT(active) FROM customer where active = 0; -- there are 15
+CREATE TABLE back_up_table AS SELECT * FROM customer where active = 0; -- directly importing to this table those non active
+SELECT * FROM back_up_table;
+
+-- Delete the non active users from the table customer raises an error so we must we must "deshabilitar" las foreign keys primero
+SET FOREIGN_KEY_CHECKS=0; 
+ -- now we can delete
+DELETE FROM customer
+WHERE active = 0;
+-- I cannot delate because of 0	129	19:17:51Error Code: 1175. You are using safe update mode and you tried to update a table without a WHERE that uses a KEY column. 
+ -- To disable safe mode, toggle the option in Preferences -> SQL Editor and reconnect.	0.000 sec​
+select * from customer;
